@@ -43,7 +43,33 @@ const countryCodes = [
   { code: '+64', name: 'New Zealand' },
   { code: '+65', name: 'Singapore' },
   { code: '+93', name: 'Afghanistan' },
-];
+  { code: '+351', name: 'Portugal' },
+  { code: '+54', name: 'Argentina' },
+  { code: '+56', name: 'Chile' },
+  { code: '+57', name: 'Colombia' },
+  { code: '+58', name: 'Venezuela' },
+  { code: '+30', name: 'Greece' },
+  { code: '+31', name: 'Netherlands' },
+  { code: '+32', name: 'Belgium' },
+  { code: '+36', name: 'Hungary' },
+  { code: '+40', name: 'Romania' },
+  { code: '+41', name: 'Switzerland' },
+  { code: '+43', name: 'Austria' },
+  { code: '+45', name: 'Denmark' },
+  { code: '+46', name: 'Sweden' },
+  { code: '+47', name: 'Norway' },
+  { code: '+48', name: 'Poland' },
+  { code: '+66', name: 'Thailand' },
+  { code: '+84', name: 'Vietnam' },
+  { code: '+90', name: 'Turkey' },
+  { code: '+92', name: 'Pakistan' },
+  { code: '+95', name: 'Myanmar' },
+  { code: '+212', name: 'Morocco' },
+  { code: '+213', name: 'Algeria' },
+  { code: '+216', name: 'Tunisia' },
+  { code: '+234', name: 'Nigeria' },
+  { code: '+254', name: 'Kenya' }
+ ];
 
 
 function App() {
