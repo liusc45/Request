@@ -30,7 +30,21 @@ const countryCodes = [
   { code: '+7', name: 'Russia' },
   { code: '+55', name: 'Brazil' },
   { code: '+52', name: 'Mexico' },
+  { code: '+61', name: 'Australia' },
+  { code: '+27', name: 'South Africa' },
+  { code: '+82', name: 'South Korea' },
+  { code: '+971', name: 'United Arab Emirates' },
+  { code: '+964', name: 'Iraq' },
+  { code: '+20', name: 'Egypt' },
+  { code: '+62', name: 'Indonesia' },
+  { code: '+98', name: 'Iran' },
+  { code: '+63', name: 'Philippines' },
+  { code: '+94', name: 'Sri Lanka' },
+  { code: '+64', name: 'New Zealand' },
+  { code: '+65', name: 'Singapore' },
+  { code: '+93', name: 'Afghanistan' },
 ];
+
 
 function App() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
