@@ -1,40 +1,40 @@
-# Sistema de Gestión de Solicitudes de Ayuda
+# Help Request Management System
 
-Sistema web completo para gestionar solicitudes de ayuda con generación de PDFs y almacenamiento S3.
+Complete web system for managing help requests with PDF generation and S3 storage.
 
-## Características
+## Features
 
-- API REST para gestión de solicitudes
-- Interfaz de usuario responsive
-- Generación automática de PDFs
-- Almacenamiento S3-compatible
-- Panel administrativo
-- Sistema de autenticación JWT
-- Validaciones robustas
-- Monitoreo y logs
+- REST API for request management
+- Responsive user interface
+- Automatic PDF generation
+- S3-compatible storage
+- Admin panel
+- JWT authentication system
+- Robust validations
+- Monitoring and logs
 
-## Arquitectura
+## Architecture
 
-El sistema utiliza una arquitectura de microservicios containerizada:
+The system uses a containerized microservices architecture:
 
 - Frontend: React + Tailwind CSS
 - Backend: Bun + Express
-- Base de datos: MySQL
+- Database: MySQL
 - Cache: Redis
-- Almacenamiento: MinIO (S3-compatible)
+- Storage: MinIO (S3-compatible)
 
-## Configuración S3
+## S3 Configuration
 
-El sistema soporta cualquier almacenamiento compatible con S3:
+The system supports any S3-compatible storage:
 
-- MinIO (por defecto)
+- MinIO (default)
 - Amazon S3
 - DigitalOcean Spaces
 - Backblaze B2
 - Wasabi
-- Cualquier otro proveedor compatible con S3
+- Any other S3-compatible provider
 
-### Variables de Entorno S3
+### S3 Environment Variables
 
 ```env
 S3_ENDPOINT=http://minio:9000
@@ -42,110 +42,110 @@ S3_REGION=us-east-1
 S3_BUCKET=helpdesk-pdfs
 S3_ACCESS_KEY=your_access_key
 S3_SECRET_KEY=your_secret_key
-S3_FORCE_PATH_STYLE=true  # Necesario para MinIO
+S3_FORCE_PATH_STYLE=true  # Required for MinIO
 ```
 
-Para usar Amazon S3:
-1. Cambiar `S3_ENDPOINT` a `https://s3.amazonaws.com`
-2. Configurar `S3_REGION` según tu región
-3. Establecer `S3_FORCE_PATH_STYLE=false`
+To use Amazon S3:
+1. Change `S3_ENDPOINT` to `https://s3.amazonaws.com`
+2. Configure `S3_REGION` according to your region
+3. Set `S3_FORCE_PATH_STYLE=false`
 
-## Instalación
+## Installation
 
-1. Clonar el repositorio
-2. Copiar `.env.example` a `.env` y configurar las variables
-3. Ejecutar:
+1. Clone the repository
+2. Copy `.env.example` to `.env` and configure the variables
+3. Run:
    ```bash
    docker-compose up -d
    ```
 
-## Estructura de Directorios
+## Directory Structure
 
 ```
 .
-├── frontend/          # Aplicación React
-├── backend/           # API Bun
-├── docker/           # Configuraciones Docker
-├── docs/            # Documentación adicional
-└── scripts/         # Scripts de utilidad
+├── frontend/          # React application
+├── backend/           # Bun API
+├── docker/           # Docker configurations
+├── docs/            # Additional documentation
+└── scripts/         # Utility scripts
 ```
 
 ## API Endpoints
 
-### Solicitudes
+### Requests
 
-- `POST /api/solicitudes`: Crear solicitud
-- `GET /api/solicitudes`: Listar solicitudes
-- `GET /api/solicitudes/:id`: Obtener solicitud
-- `GET /api/solicitudes/:id/pdf`: Descargar PDF
+- `POST /api/solicitudes`: Create request
+- `GET /api/solicitudes`: List requests
+- `GET /api/solicitudes/:id`: Get request
+- `GET /api/solicitudes/:id/pdf`: Download PDF
 
-### Almacenamiento PDF
+### PDF Storage
 
-Los PDFs se almacenan automáticamente en S3 con la siguiente estructura:
+PDFs are automatically stored in S3 with the following structure:
 ```
 s3://helpdesk-pdfs/
-  ├── YYYY/               # Año
-  │   ├── MM/            # Mes
-  │   │   ├── DD/        # Día
-  │   │   │   ├── solicitud-{id}.pdf
+  ├── YYYY/               # Year
+  │   ├── MM/            # Month
+  │   │   ├── DD/        # Day
+  │   │   │   ├── request-{id}.pdf
 ```
 
-## Seguridad
+## Security
 
-- Rate limiting por IP
-- Validación de datos
-- Sanitización de entrada
-- CAPTCHA en formularios
-- Cifrado en tránsito (TLS)
-- Logs de auditoría
+- IP-based rate limiting
+- Data validation
+- Input sanitization
+- CAPTCHA on forms
+- Transport encryption (TLS)
+- Audit logs
 
-## Monitoreo
+## Monitoring
 
-- Healthchecks en todos los servicios
-- Métricas de rendimiento
-- Logs estructurados
-- Alertas automáticas
+- Healthchecks on all services
+- Performance metrics
+- Structured logs
+- Automatic alerts
 
 ## Backup
 
-Los datos se respaldan en:
-- MySQL: Volumen persistente
-- Redis: Volumen persistente
-- S3: Replicación según proveedor
+Data is backed up in:
+- MySQL: Persistent volume
+- Redis: Persistent volume
+- S3: Provider-dependent replication
 
 ## Troubleshooting
 
-### Problemas Comunes
+### Common Issues
 
-1. Error de conexión S3:
-   - Verificar credenciales
-   - Comprobar endpoint
-   - Validar permisos del bucket
+1. S3 connection error:
+   - Verify credentials
+   - Check endpoint
+   - Validate bucket permissions
 
-2. PDFs no se generan:
-   - Revisar logs del backend
-   - Verificar espacio en disco
-   - Comprobar permisos S3
+2. PDFs not generating:
+   - Check backend logs
+   - Verify disk space
+   - Check S3 permissions
 
-## Mantenimiento
+## Maintenance
 
-### Actualizaciones
+### Updates
 
 ```bash
-# Actualizar contenedores
+# Update containers
 docker-compose pull
 docker-compose up -d
 
-# Limpiar volúmenes antiguos
+# Clean old volumes
 docker system prune
 ```
 
 ### Logs
 
 ```bash
-# Ver logs de un servicio
-docker-compose logs -f [servicio]
+# View service logs
+docker-compose logs -f [service]
 
-# Ver logs de PDF generation
+# View PDF generation logs
 docker-compose logs -f backend | grep PDF
 ```

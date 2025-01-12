@@ -1,6 +1,5 @@
-# Use Bun as the base image
-FROM oven/bun:latest
-
+# Build stage
+FROM oven/bun:1.1.43 AS builder
 WORKDIR /app
 
 # Copy package files
@@ -15,6 +14,16 @@ COPY . .
 
 # Build the application
 RUN bun run build
+
+# Production stage
+FROM oven/bun:1.1.43-alpine
+WORKDIR /app
+
+# Copy only the necessary files from builder
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/bun.lockb ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
 
 # Expose port
 EXPOSE 3000
